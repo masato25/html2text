@@ -1,0 +1,31 @@
+set realname = "myname"
+set from = "emailname@email.com"
+set use_from = yes
+set envelope_from = yes
+
+set smtp_url = "smtps://smtp.server.com:587/"
+set imap_user = "emailname@email.com"
+set folder = "imaps://outlook.server.com:993"
+set spoolfile = "+INBOX"
+set ssl_force_tls = yes
+
+# G to get mail
+bind index G imap-fetch-mail
+set editor = "vim"
+set charset = "utf-8"
+set record = ''
+# check email every 1min
+set timeout=60
+
+# paths
+set header_cache = ~/.config/mutt/cache/headers
+set message_cachedir = ~/.config/mutt/cache/bodies
+set mailcap_path = ~/.config/mutt/mailcap
+set certificate_file = ~/.config/mutt/certificates
+set tmpdir = ~/.config/mutt/tmp
+
+# render HTML and some other types as text
+auto_view text/html application/text application/pdf
+
+# many companies send very poor text/plain parts, so prefer html to text/plain
+alternative_order text/enriched text/html text/plain text
