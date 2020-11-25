@@ -39,25 +39,26 @@ func EncodeBig5(f *os.File) (output []byte, err error) {
 }
 
 func main() {
+	if len(os.Args) < 2 {
+		panic(fmt.Errorf("%s", "args missing. main [html filepath] [encoding]"))
+	}
 	filename := os.Args[1]
 	f, err := os.Open(filename)
 	check(err)
-
 	dat := []byte{}
-	if len(os.Args) > 2 {
-		encoding := os.Args[2]
-		if encoding == "big5" {
-			dat, err = EncodeBig5(f)
-		} else if encoding == "utf-8" {
-			dat, err = ioutil.ReadFile(os.Args[1])
-			check(err)
-		} else {
-			check(fmt.Errorf("encoding: %s no supported", encoding))
-		}
+	encoding := os.Args[2]
+	if encoding == "big5" {
+		dat, err = EncodeBig5(f)
+	} else if encoding == "utf-8" {
+		dat, err = ioutil.ReadFile(os.Args[1])
+		check(err)
+	} else {
+		// catch errors of not supproting encoding
+		check(fmt.Errorf("encoding: %s no supported", encoding))
 	}
 	inputHTML := string(dat)
-	//ioutil.WriteFile("/Users/masato/Dev/go/src/github.com/masato25/html2text/oo", dat, 0644)
 	text, err := html2text.FromString(inputHTML, html2text.Options{PrettyTables: true})
 	check(err)
+	// output decode data
 	fmt.Println(text)
 }
