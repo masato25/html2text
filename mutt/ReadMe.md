@@ -1,4 +1,9 @@
-Setup Mutt
+## Install Mutt on mac
+```
+brew install mutt
+```
+
+## Setup Mutt
 
 ```
 mkdir -p ~/.config/mutt
@@ -14,3 +19,8 @@ cd ~/.config/mutt ./init.sh
 
 * modified muttrc to setup your mail settings
 * change html2text compiled path for mailcap
+
+## Starrt mutt
+```
+mutt
+```
